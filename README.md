@@ -3,7 +3,7 @@ Python3 实现一个简单的web服务器
 # 教程
 网址 https://zhuanlan.zhihu.com/p/21323273
 # 注意
-* Python3 中使用的是 http.server，在引入的时候应该 from http.server import HTTPServer, BaseHTTPRequestHandler</br>
+* BaseHTTPServer模块在Python3中已被合并到http.server在引入的时候应该 from http.server import HTTPServer, BaseHTTPRequestHandler</br>
 * 在do_GET函数中，发送Page内容时，应发送bytes,不应该是str。也就是需要对Page进行编码
 ```
 self.wfile.write(self.Page.encode('ascii'))

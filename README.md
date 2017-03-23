@@ -16,6 +16,14 @@ self.wfile.write(self.Page.encode('ascii'))
 if isinstance(page,str):
     page=page.encode('ascii')
 ```
+* 在步骤三获取文件的完整路径的时候，os.getcwd() 得到的是类似于E:\python\web，self.path得到的是 /index.html.所以
+```python
+os.getcwd()+self.path
+```
+>> 得到的并不是正确的路径，我对self.path进行了处理，然后进行路径拼接
+```
+full_path=os.path.join(os.getcwd(),self.path.replace('/',''))
+```
 # 新接触的库
 * `http.server` python3中内建的HTTP servers</br>
 * `httpie` 是一个命令行下的HTTP客户端。可以在命令行提供与图形界面一样友好的网络服务交互，可用在HTTP服务器的测试、调试中。

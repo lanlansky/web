@@ -24,6 +24,8 @@ os.getcwd()+self.path
 ```
 full_path=os.path.join(os.getcwd(),self.path.replace('/',''))
 ```
+* 在步骤四中，设置的所有可能的情况Cases里面每个数据不应该带有()。</br>
+  如果带有()，Cases[i]就是一个函数的实例化，后续的调用不能是  handler=case()
 # 新接触的库
 * `http.server` python3中内建的HTTP servers</br>
 * `httpie` 是一个命令行下的HTTP客户端。可以在命令行提供与图形界面一样友好的网络服务交互，可用在HTTP服务器的测试、调试中。

@@ -2,6 +2,8 @@
 _author_='lhw'
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import sys,io,os
+import subprocess
+# subprocess 进程类
 class ServerException(Exception):
 	#服务器内部错误
 	pass
@@ -35,9 +37,17 @@ class case_directory_index_file(object):
 	def act(self,handler):
 		#响应index.html
 		handler.handle_file(self.index_path(handler))
+class case_cgi_file(object):
+	#处理脚本文件
+	def test(self,handler):
+		return os.path.isfile(handler.full_path) and handler.full_path.endswith('.py')
+	def act(self,handler):
+		#运行脚本文件
+		handler.run_cgi(handler.full_path)
 class RequestHandler(BaseHTTPRequestHandler):
 	# 所有可能的情况
 	Cases = [case_no_file,
+			case_cgi_file,
 			case_existing_file,
 			case_directory_index_file,
 			case_always_fail]
@@ -50,6 +60,10 @@ class RequestHandler(BaseHTTPRequestHandler):
 			</body>
 		</html>
 	'''	
+	def run_cgi(self,full_path):
+		data=subprocess.check_output(["python", full_path])
+		#父进程等待子进程完成返回子进程向标准输出的输出结果
+		self.send_content(data)
 	def send_content(self,page,status=200):
 		self.send_response(status)
 		self.send_header("Content-Type", "text/html")

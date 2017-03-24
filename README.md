@@ -29,3 +29,4 @@ full_path=os.path.join(os.getcwd(),self.path.replace('/',''))
 # 新接触的库
 * `http.server` python3中内建的HTTP servers</br>
 * `httpie` 是一个命令行下的HTTP客户端。可以在命令行提供与图形界面一样友好的网络服务交互，可用在HTTP服务器的测试、调试中。
+* `subprocess` 进程库
